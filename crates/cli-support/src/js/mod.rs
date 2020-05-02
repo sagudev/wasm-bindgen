@@ -2445,7 +2445,7 @@ impl<'a> Context<'a> {
         self.expose_not_defined();
         let name = self.import_name(js)?;
         let js = format!(
-            "typeof {name} == 'function' ? {name} : notDefined('{name}')",
+            "typeof {name} == 'function' ? function () { {name}(); } : notDefined('{name}')",
             name = name,
         );
         self.wasm_import_definitions.insert(id, js);
